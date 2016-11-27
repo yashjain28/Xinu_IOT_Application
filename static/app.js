@@ -1,4 +1,24 @@
 $(document).ready(function () {
+    $('#spclick').click(function () {
+        console.log("Enter")
+       var recognition = new webkitSpeechRecognition();
+       recognition.onresult = function(event) {
+           console.log(event)
+           recognizedtext = event.results[0][0].transcript
+           console.log(recognizedtext)
+           if (recognizedtext.toLowerCase() == "led on") {
+               $.ajax({
+                   type: 'GET',
+                   url: 'http://127.0.0.1:5000/led1',
+                   success: function (msg) {
+                       console.log(msg);
+                       //set_weather_icon(msg);
+                   }
+               });
+           }
+       }
+       recognition.start();
+    })
     $('#btnclick').click(function () {
         console.log("bondy");
         //console.log(currentPosition);
