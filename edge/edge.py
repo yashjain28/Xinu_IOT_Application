@@ -23,9 +23,8 @@ while 1:
     conn, addr = s.accept()
     print 'Connection address:', addr
     data = conn.recv(BUFFER_SIZE)
-    print data
+    print "recieved from client: ",data
     resp = sock.sendto(data, (UDP_IP, UDP_PORT)) # connect to udp server and get data
-    print resp
     d, address = sock.recvfrom(UDP_PORT)
     print "received data:", d
     conn.send(d)  # echo

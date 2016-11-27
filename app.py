@@ -1,22 +1,24 @@
 import socket
-from flask import Flask, request
+from flask import Flask, render_template
 app = Flask(__name__)
 
-UDP_IP = "192.168.2.4"
-UDP_PORT = 22
+TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
+BUFFER_SIZE = 1024
 
-# intialize socket object
-sock = socket.socket(socket.AF_INET, # Internet
-                    socket.SOCK_DGRAM) # UDP
-sock.settimeout(5.0)
+
+def send(msg):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((TCP_IP, TCP_PORT))
+    s.send(msg)
+    data = s.recv(BUFFER_SIZE)
+    s.close()
+    return data
 
 @app.route("/")
 def slash():
     MESSAGE = "tmpsensor read"
-    resp = sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
-    print resp
-    data, address = sock.recvfrom(UDP_PORT)
-    return data
+    return send(MESSAGE)
 
 @app.route("/led1")
 def led1():
@@ -28,13 +30,11 @@ def led1():
 @app.route("/led2")
 def led2():
     MESSAGE = ""
-    sock.sendto(MESSAGE, (UDP_IP,UDP_PORT))
-    data, address = sock.recvfrom(UDP_PORT)
-    return data
+    return send(MESSAGE)
 
 @app.route("/index")
 def home():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
