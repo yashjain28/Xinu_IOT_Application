@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <title>DASHBOARD</title>
+    <script src="/static/dash.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="#">
+          <h1>DEVICE STATUS DASHBOARD</h1>
+        </a>
+      </div>
+    </div>
+  </nav>
+    <div class="container">
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+                <tr class="danger">
+                    <th>#</th>
+                    <th>Device Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>LED</td>
+                    <td id="led_status">OFF</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>TEMPERATURE SENSOR</td>
+                    <td id="temp_status">OFF</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>BUZZER</td>
+                    <td id="temp_status">OFF</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>MOTOR 1</td>
+                    <td id="motor1_status">OFF</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>MOTOR 1</td>
+                    <td id="motor2_status">OFF</td>
+                    <td>@mdo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

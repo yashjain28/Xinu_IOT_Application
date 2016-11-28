@@ -4,10 +4,9 @@ import socket
 
 # socket attributes to communicate with xinu udp server
 UDP_IP = "192.168.2.4"
+UDP_IP_1 = "192.168.2.5"
 UDP_PORT = 22
-sock = socket.socket(socket.AF_INET, # Internet
-                    socket.SOCK_DGRAM) # UDP
-sock.settimeout(5.0)
+
 
 # socket attributes of this tcp server
 TCP_IP = '127.0.0.1'
@@ -24,6 +23,9 @@ while 1:
     print 'Connection address:', addr
     data = conn.recv(BUFFER_SIZE)
     print "recieved from client: ",data
+    sock = socket.socket(socket.AF_INET, # Internet
+                    socket.SOCK_DGRAM) # UDP
+    sock.settimeout(5.0)
     resp = sock.sendto(data, (UDP_IP, UDP_PORT)) # connect to udp server and get data
     d, address = sock.recvfrom(UDP_PORT)
     print "received data:", d

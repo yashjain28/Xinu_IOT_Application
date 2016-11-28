@@ -7,14 +7,7 @@ $(document).ready(function () {
            recognizedtext = event.results[0][0].transcript
            console.log(recognizedtext)
            if (recognizedtext.toLowerCase() == "led on") {
-               $.ajax({
-                   type: 'GET',
-                   url: 'http://127.0.0.1:5000/led1',
-                   success: function (msg) {
-                       console.log(msg);
-                       //set_weather_icon(msg);
-                   }
-               });
+               make_ajax("led1");
            }
        }
        recognition.start();
@@ -22,17 +15,9 @@ $(document).ready(function () {
     $('#btnclick').click(function () {
         console.log("bondy");
         //console.log(currentPosition);
-        $.ajax({
-            type: 'GET',
-            url: 'http://127.0.0.1:5000/',
-            success: function (msg) {
-                console.log(msg);
-                $('#temperature').text(msg);
-                $('#toggle').removeAttr('style');
-                //set_weather_icon(msg);
-            }
-        });
+        make_ajax("temp");
     });
+
     $('#toggle').click(function () {
         if ($('#txt').html() === 'Celcius') {
             $('#txt').html('Farenhiet');
@@ -69,4 +54,19 @@ function convert_farenhiet_to_celcius(temp) {
 }
 function round(num) {
     return Math.round(num * 100) / 100;
+}
+
+function make_ajax(apiurl){
+    base_url = "http://127.0.0.1:5000/";
+    apiurl = base_url + apiurl;
+    $.ajax({
+            type: 'GET',
+            url: apiurl,
+            success: function (msg) {
+                console.log(msg);
+                $('#temperature').text(msg);
+                $('#toggle').removeAttr('style');
+                //set_weather_icon(msg);
+            }
+        });
 }
