@@ -4,7 +4,7 @@ import socket
 
 UDP_IP = "192.168.2.4"
 UDP_PORT = 22
-MESSAGE = "motor FORWARD"
+MESSAGE = "motor STOP"
 
 sock_udp = socket.socket(socket.AF_INET, # Internet
                     socket.SOCK_DGRAM) # UDP

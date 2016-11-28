@@ -13,7 +13,20 @@ $(document).ready(function (){
             url: 'http://127.0.0.1:5000/'+device,
             success: function (msg) {
                 console.log(msg);
-                $('#'+device +'_status').text(msg);
+                if(device == "temp"){
+                    var float_temp = parseFloat(msg);
+                    if(10<msg && msg<40)
+                        $('#'+device +'_status').text('Working');
+                    else
+                        $('#'+device +'_status').text('Not Working');
+                }
+
+                else{
+                    if(msg=='1')
+                        $('#'+device +'_status').text('ON');
+                    else
+                        $('#'+device +'_status').text('OFF');
+                    }
             },
             complete:function(){
                 setTimeout(function(){get_status(device);}, 10000);
@@ -21,7 +34,8 @@ $(document).ready(function (){
         });
     }
     get_status('led');
-    get_status('temperature');
+    get_status('temp');
+    get_status('buzzer');
     get_status('motor1');
     get_status('motor2');
 });

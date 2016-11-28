@@ -3,13 +3,16 @@ $(document).ready(function () {
         console.log("Enter")
        var recognition = new webkitSpeechRecognition();
        recognition.onresult = function(event) {
-           console.log(event)
-           recognizedtext = event.results[0][0].transcript
-           console.log(recognizedtext)
-           if (recognizedtext.toLowerCase() == "led on") {
+           console.log(event);
+           recognizedtext = event.results[0][0].transcript;
+           console.log(recognizedtext);
+           if (recognizedtext.toLowerCase() == "light on") {
                make_ajax("led1");
            }
-       }
+           else if (recognizedtext.toLowerCase() == "light off"){
+               make_ajax("led2");
+           }
+       };
        recognition.start();
     })
     $('#btnclick').click(function () {
@@ -65,8 +68,23 @@ function make_ajax(apiurl){
             success: function (msg) {
                 console.log(msg);
                 $('#temperature').text(msg);
+                var float_temp = parseFloat(msg);
+                if(10<float_temp && float_temp<40)
+                    make_ajax_temp('buzz');
                 $('#toggle').removeAttr('style');
                 //set_weather_icon(msg);
+            }
+        });
+}
+
+function make_ajax_temp(apiurl){
+    base_url = "http://127.0.0.1:5000/";
+    apiurl = base_url + apiurl;
+    $.ajax({
+            type: 'GET',
+            url: apiurl,
+            success: function (msg) {
+                console.log(msg);
             }
         });
 }

@@ -3,8 +3,8 @@
 import socket
 
 # socket attributes to communicate with xinu udp server
-UDP_IP = "192.168.2.4"
-UDP_IP_1 = "192.168.2.5"
+UDP_IP_1 = "192.168.2.4"
+UDP_IP_2 = "192.168.2.5"
 UDP_PORT = 22
 
 
@@ -26,8 +26,14 @@ while 1:
     sock = socket.socket(socket.AF_INET, # Internet
                     socket.SOCK_DGRAM) # UDP
     sock.settimeout(5.0)
-    resp = sock.sendto(data, (UDP_IP, UDP_PORT)) # connect to udp server and get data
-    d, address = sock.recvfrom(UDP_PORT)
+    try:
+        if(data[0]=='1'):
+            resp = sock.sendto(str(len(data[1:]))+' '+data[1:], (UDP_IP_1, UDP_PORT)) # connect to udp server and get data
+        else:
+            resp = sock.sendto(str(len(data[1:]))+' '+data[1:], (UDP_IP_2, UDP_PORT))
+        d, address = sock.recvfrom(UDP_PORT)
+    except:
+        continue
     print "received data:", d
     conn.send(d)  # echo
     conn.close()
