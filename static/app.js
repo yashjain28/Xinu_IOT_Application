@@ -14,7 +14,14 @@ $(document).ready(function () {
            }
        };
        recognition.start();
-    })
+    });
+    $('#ledon').click(function(){
+        console.log("led on");
+        make_ajax("led1");
+    });
+    $('#led_off').click(function(){
+        make_ajax("led2");
+    });
     $('#btnclick').click(function () {
         console.log("bondy");
         //console.log(currentPosition);

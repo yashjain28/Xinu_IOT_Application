@@ -8,6 +8,7 @@
 
 $(document).ready(function (){
     function get_status(device){
+        console.log(device);
         $.ajax({
             type: 'GET',
             url: 'http://127.0.0.1:5000/'+device,
@@ -29,13 +30,16 @@ $(document).ready(function (){
                     }
             },
             complete:function(){
-                setTimeout(function(){get_status(device);}, 10000);
+                console.log("complete");
+                //setTimeout(function(){get_status(device);}, 10000);
             }
         });
     }
-    get_status('led');
-    get_status('temp');
-    get_status('buzzer');
-    get_status('motor1');
-    get_status('motor2');
+    $('#status').click(function (){
+        get_status('led');
+        get_status('temp');
+        get_status('buzzer');
+        get_status('motor1');
+        get_status('motor2');
+    });
 });

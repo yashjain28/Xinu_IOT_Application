@@ -75,7 +75,9 @@ def basic():
 @app.route("/motor1")
 def motor1():
     msg = dev1 + 'motor read'
-    status = int(send(msg))
+    msg = send(msg)
+    print msg
+    status = int(msg.strip('\0'))
     print status
     if(status&1==1 or status&2==1):
         return '1'
@@ -84,7 +86,7 @@ def motor1():
 @app.route("/motor2")
 def motor2():
     msg = dev1 + 'motor read'
-    status = int(send(msg))
+    status = int(send(msg).strip('\0'))
     print status
     if(status&4==1 or status&8==1):
         return '1'

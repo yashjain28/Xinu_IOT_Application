@@ -3,8 +3,8 @@
 import socket
 
 # socket attributes to communicate with xinu udp server
-UDP_IP_1 = "192.168.2.4"
-UDP_IP_2 = "192.168.2.5"
+UDP_IP_2 = "192.168.2.4"
+UDP_IP_1 = "192.168.2.3"
 UDP_PORT = 22
 
 
